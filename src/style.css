@@ -3,11 +3,16 @@
     margin: 0;
     padding: 0;
 }
+@font-face {
+    font-family: myfont;
+    src: url('/static/fonts/LeMans.ttf');
+}
 
-html,
 body
 {
     overflow: hidden;
+    height: 100vh;
+    color: white;
 }
 
 .webgl
@@ -17,3 +22,95 @@ body
     left: 0;
     outline: none;
 }
+
+/* .point {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+.point:hover .text{
+    opacity: 0.7;
+}
+.point .label {
+    position: absolute;
+    top: 50%;
+    left: 60%;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    line-height: 28px;
+    text-align: center;
+    background-color:lightgreen;
+    opacity: 0.7;
+    font-size: 15px;
+    transition: 0.5s;
+}
+
+.point .text {
+    position: absolute;
+    left: 100px;
+    top: 50px;
+    height: 70px;
+    width: 300px;
+    line-height: 28px;
+    text-align: center;
+    padding: 15px;
+    border:1.5px solid red;
+    color: lightgreen;
+    font-size: 15px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s;
+}
+
+.point-1 .text {
+    height: 130px;
+    width: 300px;
+}
+.point-2 .text {
+    height: 130px;
+    width: 300px;
+}
+.point-3 .text {
+    height: 130px;
+    width: 300px;
+}
+.point-4 .text {
+    height: 220px;
+    width: 300px;
+}
+.point-5 .text {
+    height: 160px;
+    width: 300px;
+}
+*/
+.title {
+    position: absolute;
+    top: 40px;
+    left: 80px;
+    font-size: 70px;
+    font-family: myfont;
+    letter-spacing: 5px;
+    color:lightgreen;
+}
+
+.name {
+    position: absolute;
+    top: 120px;
+    left: 80px;
+    font-size: 50px;
+    font-family: myfont;
+    letter-spacing: 5px;
+    color:lightgreen;
+}
+/*
+footer {
+    position: absolute;
+    bottom: 40px;
+    left: 80px;
+    font-size: 20px;
+    font-family: consolas;
+    letter-spacing: 10px;
+    color: red;
+} */

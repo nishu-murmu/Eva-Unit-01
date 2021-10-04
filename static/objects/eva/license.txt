@@ -1,0 +1,11 @@
+Model Information:
+* title:	EVANGELION UNIT ONE
+* source:	https://sketchfab.com/3d-models/evangelion-unit-one-07081cd3a70e494095271c43a591af81
+* author:	BROWNCOAT (https://sketchfab.com/tiwariarpit0)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "EVANGELION UNIT ONE" (https://sketchfab.com/3d-models/evangelion-unit-one-07081cd3a70e494095271c43a591af81) by BROWNCOAT (https://sketchfab.com/tiwariarpit0) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

@@ -1,21 +1,22 @@
 import './style.css'
 import * as THREE from 'three'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { GUI } from 'three/examples/jsm/libs/dat.gui.module'
-import Stats from 'three/examples/jsm/libs/stats.module'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 // Global Variables
-let scene, camera, renderer, clock, gui, stats, controls
+let scene, camera, renderer, clock, gui, stats, controls, raycaster
 let canvas, sizes, elapsedTime
-let geometry, material, cube
+let points, loader
 let pointLight, ambientLight
 
-
 canvas = document.querySelector('.canvas')
+raycaster = new THREE.Raycaster()
 clock = new THREE.Clock()
-gui = new GUI({ width: 400 })
-stats = new Stats()
-document.body.appendChild(stats.dom)
+loader = new GLTFLoader()
+// gui = new GUI({ width: 400, closed: false })
+
 sizes = {
     width: window.innerWidth,
     height: window.innerHeight
@@ -31,35 +32,41 @@ function createScene() {
     })
     renderer.setSize(window.innerWidth, window.innerHeight)
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-    // Controls for mouse movements
-    controls = new OrbitControls(camera, canvas)
-    controls.enableDamping = true
 }
 
 function createObjects() {
-    geometry = new THREE.BoxGeometry(1, 1, 1)
-    material = new THREE.MeshStandardMaterial({ color: 0xff0000 })
-    cube = new THREE.Mesh(geometry, material)
-    scene.add(cube)
+    loader.load(
+        'objects/eva/scene.gltf',
+        (gltf) => {
+            gsap.registerPlugin(ScrollTrigger)
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: '.canvas',
+                    pin: true,
+                    scrub: 0.2,
+                    start: 'top top',
+                    end: '+=1000'
+                }
+            })
+            tl.to(gltf.scene.rotation, { x: 2, y: -3, duration: 3, ease: 'none' })
+            tl.to(gltf.scene.rotation, { x: 4, y: -6, duration: 3, ease: 'none' })
+            gltf.scene.position.y = 1
+            scene.add(gltf.scene)
+        }
+    )
 }
 
 function createLights() {
     // lights for display of objects 
     pointLight = new THREE.DirectionalLight(0xffffff, 1)
     pointLight.position.set(0, 3, 5)
-
     ambientLight = new THREE.AmbientLight(0xffffff, 0.4)
-
     scene.add(pointLight, ambientLight)
 }
 
 function animate() {
-     elapsedTime = clock.getElapsedTime()
-    // Update controls
-    controls.update()
-    stats.update()
-    cube.rotation.y = elapsedTime
-    cube.rotation.x = elapsedTime
+    elapsedTime = clock.getElapsedTime()
+
     // Render
     renderer.render(scene, camera)
     // Call tick again on the next frame
@@ -79,11 +86,9 @@ window.addEventListener('resize', () => {
     // Update sizes
     sizes.width = window.innerWidth
     sizes.height = window.innerHeight
-
     // Update camera
     camera.aspect = sizes.width / sizes.height
     camera.updateProjectionMatrix()
-
     // Update renderer
     renderer.setSize(sizes.width, sizes.height)
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
