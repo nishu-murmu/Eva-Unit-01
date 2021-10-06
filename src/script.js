@@ -1,21 +1,18 @@
 import './style.css'
 import * as THREE from 'three'
-import { GUI } from 'three/examples/jsm/libs/dat.gui.module'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 // Global Variables
-let scene, camera, renderer, clock, gui, stats, controls, raycaster
-let canvas, sizes, elapsedTime
-let points, loader
-let pointLight, ambientLight
+let scene, camera, renderer, clock
+let canvas, sizes
+let loader
+let directionalLight, directionalLightRed
 
 canvas = document.querySelector('.canvas')
-raycaster = new THREE.Raycaster()
 clock = new THREE.Clock()
 loader = new GLTFLoader()
-// gui = new GUI({ width: 400, closed: false })
 
 sizes = {
     width: window.innerWidth,
@@ -43,13 +40,16 @@ function createObjects() {
                 scrollTrigger: {
                     trigger: '.canvas',
                     pin: true,
-                    scrub: 0.2,
+                    scrub: 0.1,
                     start: 'top top',
                     end: '+=1000'
                 }
             })
-            tl.to(gltf.scene.rotation, { x: 2, y: -3, duration: 3, ease: 'none' })
-            tl.to(gltf.scene.rotation, { x: 4, y: -6, duration: 3, ease: 'none' })
+            tl.to(gltf.scene.rotation, { x: 0.69, y: -1, duration: 4, ease: 'none' })
+            tl.to(gltf.scene.rotation, { x:1.2, y: -3.5, duration: 4, ease: 'none' })
+            tl.to(gltf.scene.rotation, { x: -0.8, y: -5.5, duration: 4, ease: 'none' })
+            tl.to(gltf.scene.rotation, { x: 1, y: -7.5, duration: 4, ease: 'none' })
+            tl.to(gltf.scene.rotation, { x: 0, y: 0, duration: 4, ease: 'none' })
             gltf.scene.position.y = 1
             scene.add(gltf.scene)
         }
@@ -57,16 +57,14 @@ function createObjects() {
 }
 
 function createLights() {
-    // lights for display of objects 
-    pointLight = new THREE.DirectionalLight(0xffffff, 1)
-    pointLight.position.set(0, 3, 5)
-    ambientLight = new THREE.AmbientLight(0xffffff, 0.4)
-    scene.add(pointLight, ambientLight)
+    directionalLight = new THREE.DirectionalLight(0xffffff, 0.7)
+    directionalLight.position.set(3, 3, 5)
+    directionalLightRed = new THREE.DirectionalLight(0xff0000, 5)
+    directionalLightRed.position.set(-3, 0, 3)
+    scene.add(directionalLight, directionalLightRed)
 }
 
 function animate() {
-    elapsedTime = clock.getElapsedTime()
-
     // Render
     renderer.render(scene, camera)
     // Call tick again on the next frame
