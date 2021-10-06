@@ -79,7 +79,7 @@ body
     color: lightgreen;
     border: 1px solid red;
     padding: 10px;
-    height: 100px;
+    height: 150px;
     width: 300px;
     top: 10%;
     left: 10%;
@@ -94,7 +94,7 @@ body
     top: 50%;
     right: 10%;
 }
-footer {
+footer a {
     position: fixed;
     bottom: 40px;
     left: 80px;
@@ -102,4 +102,5 @@ footer {
     font-family: consolas;
     letter-spacing: 10px;
     color: red;
+    text-decoration: none;
 }
